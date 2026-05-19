@@ -16,6 +16,24 @@ const FoundryBridge = (() => {
   let stateReadyPromise = embedded
     ? new Promise((resolve) => stateReadyResolvers.push(resolve))
     : Promise.resolve(null);
+  // Defensive timeout: if the parent never sends `whispers:state` (wrong
+  // embedder, message lost, parent silently broken), don't hang the SPA
+  // forever. Resolve with `null` so the bootstrap mounts; the autosave-on-
+  // mount guard in app.js prevents this fallback from clobbering whatever the
+  // actor actually contains.
+  const STATE_TIMEOUT_MS = 1500;
+  if (embedded) {
+    setTimeout(() => {
+      if (libraryState === null && stateReadyResolvers.length > 0) {
+        console.warn(
+          "[FoundryBridge] no whispers:state after",
+          STATE_TIMEOUT_MS, "ms — parent may not be whispers-foundry. Mounting without actor sync.");
+        const resolvers = stateReadyResolvers.splice(0);
+        for (const r of resolvers) r(null);
+        stateReadyPromise = Promise.resolve(null);
+      }
+    }, STATE_TIMEOUT_MS);
+  }
   const notify = (set) => set.forEach((fn) => { try { fn(); } catch (_) { /* noop */ } });
   window.addEventListener("message", (e) => {
     const d = e.data;

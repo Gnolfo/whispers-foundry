@@ -48,7 +48,18 @@ function App() {
   // prior-name entry first so a keystroke-by-keystroke rename collapses into
   // a single library entry under the final name. An empty/whitespace name is
   // treated as a transient state — we defer saving until the name is back.
+  //
+  // Skip the very first run: `c` was just initialized from loadLibrary() (or
+  // DEFAULT_CHARACTER), so saving here would either echo data we just
+  // received or — worse, when embedded with an empty/missing actor or a
+  // failed handshake — stamp the actor with whatever we happened to mount
+  // with. Only user-initiated changes to `c` should trigger a save.
+  const didMountRef = React.useRef(false);
   React.useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
     setLibrary((lib) => {
       const oldName = prevNameRef.current;
       const newName = c.name;
