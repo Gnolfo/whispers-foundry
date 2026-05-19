@@ -1,0 +1,24 @@
+<section class="whispers-item whispers-item--armor">
+  <header>
+    <input type="text" name="name" value="{{item.name}}" placeholder="Armor name" />
+    <label class="key">Key
+      <input type="text" name="system.key" value="{{system.key}}" />
+    </label>
+  </header>
+
+  <fieldset>
+    <legend>Max Hits Penalty</legend>
+    <input type="number" name="system.max_hits" value="{{system.max_hits}}" />
+  </fieldset>
+
+  <fieldset>
+    <legend>Wound Reduction</legend>
+    <div class="whispers-armor__wounds">
+      <label>w1 <input type="number" name="system.w1" value="{{system.w1}}" /></label>
+      <label>w2 <input type="number" name="system.w2" value="{{system.w2}}" /></label>
+      <label>w3 <input type="number" name="system.w3" value="{{system.w3}}" /></label>
+      <label>w4 <input type="number" name="system.w4" value="{{system.w4}}" /></label>
+      <label>w5 <input type="number" name="system.w5" value="{{system.w5}}" /></label>
+    </div>
+  </fieldset>
+</section>

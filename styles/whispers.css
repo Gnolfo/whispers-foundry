@@ -1,0 +1,120 @@
+/* Whispers in the Roots — system stylesheet (Phase 1 baseline) */
+
+/* ── Containers ────────────────────────────────────────────────────── */
+.whispers.sheet {
+  font-family: "Signika", "Open Sans", sans-serif;
+}
+
+.whispers-character,
+.whispers-npc,
+.whispers-item {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.whispers-sheet-placeholder h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.muted {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* ── Debug table (placeholder character sheet) ────────────────────── */
+.whispers-debug {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.whispers-debug th {
+  text-align: left;
+  width: 160px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+}
+.whispers-debug td {
+  padding: 4px 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Forms ────────────────────────────────────────────────────────── */
+.whispers fieldset {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 0;
+}
+.whispers fieldset legend {
+  font-weight: 600;
+  padding: 0 6px;
+}
+.whispers label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.85rem;
+}
+.whispers input[type="text"],
+.whispers input[type="number"] {
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* ── NPC sheet ────────────────────────────────────────────────────── */
+.whispers-npc__header input[name="name"] {
+  font-size: 1.2rem;
+  font-weight: 600;
+  width: 100%;
+}
+.whispers-npc__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.whispers-npc__hazards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+/* ── Item sheets ──────────────────────────────────────────────────── */
+.whispers-item header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.whispers-item header input[name="name"] {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.whispers-item header .key input {
+  width: 100px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+.whispers-abilities {
+  list-style: decimal inside;
+  padding-left: 0;
+}
+.whispers-abilities li {
+  margin: 8px 0;
+}
+.whispers-abilities .ability-desc {
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+.whispers-armor__wounds {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}

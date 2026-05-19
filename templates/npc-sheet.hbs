@@ -1,0 +1,42 @@
+<section class="whispers-npc">
+  <header class="whispers-npc__header">
+    <input type="text" name="name" value="{{actor.name}}" placeholder="Name" />
+  </header>
+
+  <div class="whispers-npc__grid">
+    <label>Ancestry
+      <input type="text" name="system.ancestry" value="{{system.ancestry}}" />
+    </label>
+    <label>Hits (current)
+      <input type="number" name="system.hits.value" value="{{system.hits.value}}" />
+    </label>
+    <label>Hits (max)
+      <input type="number" name="system.hits.max" value="{{system.hits.max}}" />
+    </label>
+    <label>Base Attack
+      <input type="number" name="system.base_attack" value="{{system.base_attack}}" />
+    </label>
+    <label>Base Guard
+      <input type="number" name="system.base_guard" value="{{system.base_guard}}" />
+    </label>
+    <label>Wound Die
+      <input type="text" name="system.wound_die" value="{{system.wound_die}}" />
+    </label>
+  </div>
+
+  <fieldset>
+    <legend>Hazard Offense</legend>
+    <div class="whispers-npc__hazards">
+      <label>Stagger    <input type="text" name="system.hazards.stagger"    value="{{system.hazards.stagger}}" /></label>
+      <label>Dread      <input type="text" name="system.hazards.dread"      value="{{system.hazards.dread}}" /></label>
+      <label>Surprise   <input type="text" name="system.hazards.surprise"   value="{{system.hazards.surprise}}" /></label>
+      <label>Anguish    <input type="text" name="system.hazards.anguish"    value="{{system.hazards.anguish}}" /></label>
+      <label>Disruption <input type="text" name="system.hazards.disruption" value="{{system.hazards.disruption}}" /></label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Notes</legend>
+    {{editor system.notes target="system.notes" button=true editable=editable}}
+  </fieldset>
+</section>

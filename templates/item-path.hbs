@@ -1,0 +1,33 @@
+<section class="whispers-item whispers-item--path">
+  <header>
+    <input type="text" name="name" value="{{item.name}}" placeholder="Path name" />
+    <label class="key">Key
+      <input type="text" name="system.key" value="{{system.key}}" />
+    </label>
+  </header>
+
+  <fieldset>
+    <legend>Classes</legend>
+    <p class="muted">Comma-separated list of class keys (e.g. <code>rogue, warrior</code>). Leave blank for universal.</p>
+    <input type="text" name="system.classesCsv" value="{{system.classes}}" />
+  </fieldset>
+
+  <fieldset>
+    <legend>Description</legend>
+    {{editor system.description target="system.description" button=true editable=editable}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Abilities ({{system.abilities.length}})</legend>
+    <ol class="whispers-abilities">
+      {{#each system.abilities}}
+        <li>
+          <strong>{{name}}</strong>
+          <span class="muted">{{type}} · {{stamina}} stamina{{#if trigger}} · trigger: {{trigger}}{{/if}}</span>
+          <div class="ability-desc">{{{description}}}</div>
+        </li>
+      {{/each}}
+    </ol>
+    <p class="muted">Abilities are seeded via the compendium build pipeline (Phase 3). Manual edits land in v1.1.</p>
+  </fieldset>
+</section>

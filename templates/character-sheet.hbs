@@ -1,0 +1,20 @@
+{{!-- Phase 1 scaffold. Replaced in Phase 2 by header + iframe layout. --}}
+<section class="whispers-character whispers-sheet-placeholder">
+  <h1>{{actor.name}}</h1>
+  <p class="muted">Whispers character — sheet UI lands in Phase 2.</p>
+
+  <table class="whispers-debug">
+    <tbody>
+      <tr><th>Ancestry</th><td>{{system.ancestry}}</td></tr>
+      <tr><th>Class</th><td>{{system.cls}}</td></tr>
+      <tr><th>Level</th><td>{{system.level}}</td></tr>
+      <tr><th>XP</th><td>{{system.xp}} / {{system.xpNext}}</td></tr>
+      <tr><th>Hits</th><td>{{system.hits.value}} / {{system.hits.max}}</td></tr>
+      <tr><th>Attack</th><td>{{system.attack}}</td></tr>
+      <tr><th>Guard</th><td>{{system.guard}}</td></tr>
+      <tr><th>Damage</th><td>{{system.damage}}</td></tr>
+      <tr><th>Hit Reduction</th><td>{{system.hit_reduction}}</td></tr>
+      <tr><th>Parry</th><td>{{system.parry}}</td></tr>
+    </tbody>
+  </table>
+</section>

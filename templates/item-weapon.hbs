@@ -1,0 +1,23 @@
+<section class="whispers-item whispers-item--weapon">
+  <header>
+    <input type="text" name="name" value="{{item.name}}" placeholder="Weapon name" />
+    <label class="key">Key
+      <input type="text" name="system.key" value="{{system.key}}" />
+    </label>
+  </header>
+
+  <fieldset>
+    <legend>Summary</legend>
+    {{editor system.summary target="system.summary" button=true editable=editable}}
+  </fieldset>
+
+  <fieldset>
+    <legend>Effects</legend>
+    {{#each system.effects}}
+      <article>
+        <strong>{{label}}</strong> <span class="muted">({{kind}})</span>
+        <div>{{{desc}}}</div>
+      </article>
+    {{/each}}
+  </fieldset>
+</section>
