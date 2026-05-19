@@ -1,0 +1,107 @@
+/* ─── CommittableCard: row layout + undo/confirm controls ─────────── */
+.creation-commit-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.creation-commit-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.creation-undo-btn {
+  color: var(--ink-3);
+  padding: 0 6px;
+  line-height: 1;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.creation-undo-btn:hover {
+  color: var(--accent);
+}
+
+.creation-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.creation-confirm__prompt {
+  font-size: 9px;
+  color: var(--ink-3);
+}
+
+.creation-confirm-btn {
+  padding: 2px 8px;
+  font: 500 11px/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.creation-confirm-btn--yes {
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+}
+
+.creation-confirm-btn--yes:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.creation-confirm-btn--no {
+  background: transparent;
+  color: var(--ink-3);
+  border: 1px solid var(--rule-2);
+}
+
+.creation-confirm-btn--no:hover {
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+/* Per-card error/blocker message slot owned by CreationCard. Children call
+   showError(msg) and CreationCard renders one of these at the bottom. The
+   key={errSeq} on the element causes a remount when a new error replaces an
+   existing one, so the intro animation re-triggers. Lives 5s total: a quick
+   "punch" in the first ~4% of the lifetime where it starts at 1.4× scale
+   and snaps to size, holds, then fades over the last ~12%. */
+.creation-card__error {
+  margin-top: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-style: italic;
+  text-align: center;
+  color: var(--accent);
+  background: var(--bg-sunken);
+  border: 1px solid var(--rule-2);
+  border-radius: 3px;
+  transform-origin: center center;
+  animation: cardErrorIntroFade 5s ease-out forwards;
+}
+
+@keyframes cardErrorIntroFade {
+  0% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+
+  4% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+

@@ -1,0 +1,737 @@
+/* ─── DerivedStatBlock ───────────────────────────────────────────────── */
+.derived-stat {
+  position: relative;
+}
+
+.derived-stat__btn {
+  width: 100%;
+  min-width: 64px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.derived-stat__btn.is-open {
+  border-color: var(--accent);
+}
+
+.derived-stat__label-btn,
+.derived-stat__value-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.derived-stat__label {
+  font-size: 9px;
+  color: var(--ink-3);
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.derived-stat__label-btn:hover .derived-stat__label {
+  color: var(--ink-2);
+  border-bottom-color: var(--rule-2);
+}
+
+.derived-stat__value {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.derived-stat__sub {
+  font-size: 9px;
+  color: var(--ink-4);
+}
+
+/* ─── Movement block ─────────────────────────────────────────────────── */
+.movement {
+  padding: 8px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 150px;
+}
+
+.movement__heading {
+  font-size: 9px;
+}
+
+.movement__unit {
+  color: var(--ink-4);
+}
+
+.movement__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.movement__sep {
+  width: 1px;
+  height: 24px;
+  background: var(--rule-2);
+  align-self: center;
+}
+
+.movement__cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.movement__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.movement__btn:hover {
+  background: var(--bg);
+}
+
+.movement__btn.is-open {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+.movement__value {
+  font: 500 18px/1 var(--serif);
+  color: var(--ink-2);
+}
+
+.movement__label-btn,
+.movement__heading-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.movement__label {
+  font-size: 9px;
+  color: var(--ink-3);
+  font-weight: 400;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.movement__label-btn:hover .movement__label,
+.movement__heading-btn:hover .movement__heading {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.movement__heading {
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.movement__btn.is-accent .movement__value {
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.movement__btn.is-accent .movement__label {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── DerivationPopup ────────────────────────────────────────────────── */
+/* `transform` composes the centering offset (translateX(-50%)) with the
+   viewport-clamp offset that useViewportClamp writes into --clamp-x / -y.
+   This way the popup stays centered under the trigger when it fits, and
+   slides just enough to stay on-screen when it doesn't. */
+.derived-popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translate(calc(-50% + var(--clamp-x, 0px)), var(--clamp-y, 0px));
+  width: 220px;
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.derived-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.derived-popup__title {
+  font: 500 16px/1.2 var(--serif);
+}
+
+.derived-popup__close {
+  color: var(--ink-3);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.derived-popup__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+
+.derived-popup__table td {
+  padding: 5px 0;
+  vertical-align: baseline;
+  border-bottom: 1px solid var(--rule);
+}
+
+.derived-popup__table tr:last-child td {
+  border-bottom: none;
+}
+
+.derived-popup__label {
+  text-align: left;
+  font-size: 12px;
+  color: var(--ink-2);
+  padding-right: 12px;
+}
+
+.derived-popup__value {
+  text-align: right;
+  font-size: 13px;
+  color: var(--ink);
+  width: 1%;
+  /* shrink to content */
+  white-space: nowrap;
+}
+
+/* ─── ExplanationPopup body (shares derived-popup chrome) ────────────── */
+.explanation-popup {
+  width: 260px;
+}
+
+.explanation-popup__body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.explanation-popup__placeholder {
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+/* ─── EffectsPopup (fighting style / weapon detail) ──────────────────── */
+.effects-popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translate(calc(-50% + var(--clamp-x, 0px)), var(--clamp-y, 0px));
+  width: 280px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.effects-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.effects-popup__title {
+  font: 500 16px/1.2 var(--serif);
+}
+
+.effects-popup__close {
+  color: var(--ink-3);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.effects-popup__summary {
+  font: italic 12px/1.4 var(--serif);
+  color: var(--ink-2);
+}
+
+.effects-popup__list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.effects-popup__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule);
+}
+
+.effects-popup__row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.effects-popup__kind {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.effects-popup__kind--ability {
+  color: var(--accent);
+}
+
+.effects-popup__kind--grants {
+  color: var(--accent);
+}
+
+.effects-popup__kind--stat {
+  color: var(--ink-2);
+}
+
+.effects-popup__kind--rule {
+  color: var(--ink-3);
+}
+
+.effects-popup__desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.effects-popup__empty {
+  font-size: 11px;
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+/* ─── Attributes group inside the top ribbon ─────────────────────────── */
+.attr-ribbon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attr-ribbon__heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.attr-ribbon__heading-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.attr-ribbon__heading-btn {
+  background: none;
+  border: 0;
+  padding: 0 6px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  transition: color 0.1s;
+}
+
+.attr-ribbon__heading-btn:hover {
+  color: var(--ink);
+}
+
+.attr-ribbon__row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+/* ─── Attribute cards (right-rail; derived) ──────────────────────────── */
+.attr-card {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 8px 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 80px;
+}
+
+.attr-card__name-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.attr-card__name {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink-3);
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.attr-card__name-btn:hover .attr-card__name {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.attr-card__value {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  padding: 2px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.attr-card__value:hover {
+  background: var(--accent-bg);
+}
+
+.attr-card__value.is-open {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.attr-card__short {
+  font-size: 9px;
+  color: var(--ink-4);
+}
+
+.attr-card-hint {
+  background: transparent;
+  border: 1px dashed var(--rule-2);
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 10px;
+  color: var(--ink-4);
+  line-height: 1.4;
+}
+
+/* ─── Max Hits advancement card body ─────────────────────────────────── */
+.maxhits-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0 2px;
+  width: 100%;
+}
+
+.maxhits-card__bump {
+  font: 500 22px/1 var(--serif);
+  color: var(--ink);
+}
+
+/* ─── Max Hits block (top stat bar, clickable derivation) ────────────── */
+.maxhits-block {
+  position: relative;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 64px;
+}
+
+.maxhits-block__label-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.maxhits-block__label {
+  font-size: 9px;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.maxhits-block__label-btn:hover .maxhits-block__label {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.wound-die__label-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.wound-die__label-btn:hover {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.maxhits-block__value {
+  font: 500 24px/1 var(--serif);
+  letter-spacing: -0.01em;
+  padding: 0 2px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.maxhits-block__value:hover {
+  background: var(--bg);
+}
+
+.maxhits-block__value.is-open {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+/* ─── Defenses grid ───────────────────────────────────────────────────
+   Left column: Wound Thresholds (tall, prominent) over Wound Die.
+   Right column: vertical stack of Guard / Max Hits / Parry / Hit
+   Reduction — uniform compact rows. */
+.defenses-grid {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.defenses-grid__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.defenses-grid__col--stack > * {
+  width: 100%;
+}
+
+/* Prominent stat cells (top-row defenses; Attack in offense) — bigger
+   numbers / a touch more padding. No accent color and no highlight so
+   they read as "primary" without conflicting with the click-to-open
+   accent on the inner buttons. */
+.stat-cell--lg .derived-stat__btn {
+  padding: 12px 14px;
+  min-width: 96px;
+}
+
+.stat-cell--lg .derived-stat__value {
+  font-size: 32px;
+}
+
+.stat-cell--lg .wound-thresholds {
+  padding: 10px 14px;
+}
+
+.stat-cell--lg .wound-threshold__btn .mono {
+  font-size: 24px;
+}
+
+.stat-cell--lg .wound-threshold__idx {
+  font-size: 11px;
+}
+
+/* ─── Offense block ──────────────────────────────────────────────────
+   width: fit-content makes the wrapper shrink to its widest child
+   (the offense-stats row), so the loadouts list below it doesn't
+   stretch past the right edge of the attack-roll calculator. */
+.offense-block {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.offense-stats {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.offense-stats__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.offense-loadouts {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.offense-loadouts__label {
+  font-size: 9px;
+  color: var(--ink-4);
+  margin-bottom: 2px;
+}
+
+/* ─── Attack-roll calculator (sits in the Offense panel) ─────────────── */
+.atk-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  min-width: 200px;
+  align-self: stretch;
+}
+
+.atk-calc__roll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.atk-calc__roll-label {
+  font-size: 10px;
+}
+
+.atk-calc__roll-expr {
+  font: 500 20px/1 var(--serif);
+  margin-top: 3px;
+}
+
+.atk-calc__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.atk-calc__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.atk-calc__stepper-label {
+  font-size: 10px;
+  color: var(--ink-3);
+}
+
+.atk-calc__stepper-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.atk-calc__stepper-val {
+  font-size: 12px;
+  min-width: 56px;
+  text-align: center;
+  color: var(--ink);
+}
+
+.atk-calc__step-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.atk-calc__step-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.atk-calc__lock {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.atk-calc__lock.is-locked {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.atk-calc__lock:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+

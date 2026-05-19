@@ -1,0 +1,384 @@
+/* ─── Ability popup (path-grid card detail) ──────────────────────────── */
+/* Wrap owns the positioning + clamping so we can stack the main ability
+   card and the smaller "gain" card vertically with a real gap (each card
+   keeps its own shadow/border = each reads as a discrete raised popup). */
+.ability-popup-wrap {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 8px);
+  transform: translate(var(--clamp-x, 0px), var(--clamp-y, 0px));
+  width: 220px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ability-popup-wrap.is-right {
+  right: auto;
+  left: calc(100% + 8px);
+}
+
+.ability-popup {
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.ability-popup-gain {
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+  text-align: center;
+}
+
+.ability-popup-gain__count {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+.ability-popup-gain__btn {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+}
+
+.ability-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ability-popup__title {
+  font: 500 16px/1.2 var(--serif);
+}
+
+.ability-popup__close {
+  color: var(--ink-3);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.ability-popup__meta {
+  font-size: 9px;
+  color: var(--ink-3);
+}
+
+.ability-popup__stamina {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.ability-popup__stamina-label {
+  font-size: 9px;
+  color: var(--ink-3);
+}
+
+.ability-popup__stamina-value {
+  font: 500 20px/1 var(--serif);
+  letter-spacing: -0.01em;
+}
+
+.ability-popup__trigger {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ability-popup__trigger-label {
+  font-size: 9px;
+  color: var(--ink-3);
+}
+
+.ability-popup__trigger-text {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.ability-popup__desc {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  padding-top: 2px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ─── Path picker popup (shown from the [Add] button) ──────────────── */
+/* The transform exists solely to host the viewport-clamp offsets so the
+   popup can slide if it would otherwise spill off the window. */
+.path-picker-popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  transform: translate(var(--clamp-x, 0px), var(--clamp-y, 0px));
+  width: 240px;
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.path-picker-popup.is-right {
+  left: auto;
+  right: 0;
+}
+
+.path-picker-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.path-picker-popup__title {
+  font: 500 14px/1.2 var(--serif);
+}
+
+.path-picker-popup__close {
+  color: var(--ink-3);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.path-picker-popup__section {
+  margin-top: 8px;
+}
+
+.path-picker-popup__section-label {
+  font-size: 9px;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.path-picker-popup__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.path-picker-popup__item {
+  padding: 6px 8px;
+  font: 500 13px/1.2 var(--serif);
+  color: var(--ink);
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.path-picker-popup__item:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.path-picker-popup__item:disabled,
+.path-picker-popup__item.is-disabled {
+  color: var(--ink-4);
+  background: var(--bg-sunken);
+  border-color: var(--rule);
+  cursor: not-allowed;
+  font-style: italic;
+}
+
+/* Signature class paths — paths unique to a single class. Accent rail on
+   the left + bolder weight to mark them as "your class's own." Disabled
+   variant keeps the rail but mutes the colour. */
+.path-picker-popup__item.is-signature {
+  font-weight: 700;
+  border-left: 3px solid var(--accent);
+  padding-left: 6px;
+}
+
+.path-picker-popup__item.is-signature:disabled,
+.path-picker-popup__item.is-signature.is-disabled {
+  border-left-color: var(--rule);
+  font-weight: 500;
+}
+
+.path-picker-popup__item:disabled:hover {
+  border-color: var(--rule);
+  color: var(--ink-4);
+}
+
+.path-picker-popup__item.is-current {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── Ancestry card: clickable label + picker popup ─────────────────── */
+.ancestry-choose-btn {
+  font: 500 13px/1.2 var(--serif);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.ancestry-choose-btn:hover {
+  opacity: 0.7;
+}
+
+.ancestry-choose-btn.has-value {
+  color: var(--ink);
+  font-style: normal;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+}
+
+.ancestry-choose-btn.has-value:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+.ancestry-committed-value {
+  font: 600 16px/1.2 var(--serif);
+  color: var(--ink);
+}
+
+/* ─── Paths section: 4 columns, committed + considered + empty ─────── */
+.paths-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.paths-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  /* anchors the path-picker-popup */
+}
+
+.paths-col__name {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: var(--ink);
+  padding: 6px 4px 6px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.paths-col__name--considered {
+  font-style: italic;
+  color: var(--accent);
+  border-bottom-style: dashed;
+  cursor: pointer;
+  background: transparent;
+}
+
+.paths-col__name--considered:hover {
+  color: var(--accent-2);
+}
+
+.paths-col--placeholder {
+  display: flex;
+  align-items: stretch;
+}
+
+.paths-col__placeholder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px;
+  border: 1px dashed var(--rule-2);
+  border-radius: 4px;
+  color: var(--ink-3);
+  font-style: italic;
+  background: transparent;
+  cursor: pointer;
+}
+
+.paths-col__placeholder:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Grow with the empty space — the wider the gap, the more present the prompt. */
+.paths-col--placeholder[data-span="2"] .paths-col__placeholder {
+  font-size: 14px;
+  padding: 14px 8px;
+}
+
+.paths-col--placeholder[data-span="3"] .paths-col__placeholder {
+  font-size: 17px;
+  padding: 22px 8px;
+}
+
+.paths-col--placeholder[data-span="4"] .paths-col__placeholder {
+  font-size: 22px;
+  padding: 32px 8px;
+}
+
+.paths-col__considering {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.paths-col__considering-label {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 9px;
+  color: var(--ink-3);
+  font-style: italic;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+}
+
+.paths-col__considering-label:hover {
+  color: var(--accent);
+}
+
+.paths-col__cancel {
+  color: var(--ink-3);
+  padding: 0 4px;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.paths-col__cancel:hover {
+  color: var(--accent);

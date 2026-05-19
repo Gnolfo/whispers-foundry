@@ -1,0 +1,143 @@
+/* ─── Hazard spine (vertical list, radial-spotlight rows, between Defenses & Offense) */
+.hazard-spine {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hazard-spine__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  align-items: center;
+  min-height: 40px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: radial-gradient(ellipse 50% 100% at center,
+      var(--bg-sunken) 25%,
+      var(--bg-sunken) 45%,
+      transparent 95%);
+}
+
+.hazard-spine__defense {
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 120ms, border-color 120ms, color 120ms;
+}
+
+.hazard-spine__defense:hover {
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.hazard-spine__defense.is-open {
+  border-color: var(--accent);
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.hazard-spine__defense-value {
+  font: 500 26px/1 var(--serif);
+  letter-spacing: -0.01em;
+}
+
+.hazard-spine__name-btn {
+  justify-self: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hazard-spine__name {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.hazard-spine__name-btn:hover .hazard-spine__name {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.hazard-spine__offense {
+  justify-self: end;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+/* ─── Hazard cards (the active layout) ───────────────────────────────── */
+.hazard-card {
+  position: relative;
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+.hazard-card__name-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hazard-card__name {
+  font-size: 9px;
+  color: var(--ink-3);
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+  display: inline-block;
+}
+
+.hazard-card__name-btn:hover .hazard-card__name {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+.hazard-card__defense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+}
+
+.hazard-card__defense:hover {
+  background: var(--bg);
+}
+
+.hazard-card__defense.is-open {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+.hazard-card__defense-label {
+  font-size: 9px;
+  color: var(--ink-4);
+}
+
+.hazard-card__defense-value {
+  font: 500 18px/1 var(--serif);
+}
+

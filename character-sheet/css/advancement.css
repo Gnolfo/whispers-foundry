@@ -1,0 +1,386 @@
+/* ─── Advancement tab: vertical stack of rows separated by a rule ─────── */
+.advancement {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+
+/* A row is its own grid; column count differs per row (creation = 4,
+   milestones = 5). align-items: start keeps cells anchored at the top of
+   the row so a taller cell (e.g. Level 1) doesn't stretch its siblings. */
+.advancement-row {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+}
+
+/* Per-section grid-template-columns is set inline based on cards.length so
+   the layout follows ADVANCEMENT_LAYOUT without per-kind CSS overrides. */
+/* Section wrapper — frames a row of cards together with its label(s) and a
+   shaded background. The Creation section uses mirrored labels above and
+   below the row, sitting on a vertical accent-tinted gradient that fades
+   to neutral in the middle (mirrors the label symmetry visually). */
+.advancement-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.advancement-section--creation {
+  background: linear-gradient(0deg,
+      color-mix(in oklch, var(--accent) 8%, var(--bg-2)) 0%,
+      var(--bg) 100%);
+}
+
+/* Section label — centered small caps. Sits flush against the section
+   padding (no extra margin) so the mirrored labels frame the row evenly. */
+.advancement-section-label {
+  text-align: center;
+  font-size: 16px;
+  color: var(--ink-3);
+}
+
+.advancement-separator {
+  border-top: 1px solid var(--rule);
+  margin: 8px 0 16px;
+}
+
+.advancement-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.advancement-slot__label {
+  text-align: center;
+  font-size: 10px;
+  color: var(--ink-3);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+/* Label row — wraps the label and the optional re-lock button. The row
+   owns the bottom border and padding so the lock can pin to the right
+   without nudging the centered label off-axis. The label inside drops
+   its own border/padding to avoid doubling up. */
+.advancement-slot__label-row {
+  position: relative;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.advancement-slot__label-row .advancement-slot__label {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.advancement-slot__lock {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  border: none;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  border-radius: 3px;
+  line-height: 0;
+}
+
+.advancement-slot__lock:hover {
+  color: var(--accent);
+  background: color-mix(in oklch, var(--accent) 10%, transparent);
+}
+
+/* Highlighted slot — used by the Level 1 column. Stands out via accent
+   ring (box-shadow keeps cell width identical to siblings, so cards still
+   line up exactly), faint accent fill, and accent label. Label font-size
+   is unchanged so the inner card top-aligns with sibling cards' inner
+   cards perfectly. */
+.advancement-slot--highlight {
+  background: color-mix(in oklch, var(--accent) 7%, var(--bg-2));
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px var(--accent);
+  padding: 6px;
+}
+
+.advancement-slot--highlight .advancement-slot__label {
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Compact Advancement widget (right-column variant) ──────────────── */
+.adv-widget {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+/* Full-width separator that visually sits below the carousel and above
+   the first card — bleeds the entire width of the right column so the
+   carousel reads as a "header" above a horizontal rule. */
+.adv-widget__rule {
+  border-top: 1px solid var(--rule);
+  margin: 0 0 10px;
+}
+
+.advancement-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adv-nav {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 28px 1fr 28px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+/* Pencil edit toggle — sits at the right edge of the carousel, slightly
+   detached from the navigation arrows via the 8px gap column. */
+.adv-nav__edit {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.adv-nav__edit:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.adv-nav__edit.is-active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* Reserved cell for an arrow — keeps the label centered when an arrow
+   is omitted at an endpoint. Empty cells render as 28px of whitespace. */
+.adv-nav__slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adv-nav__arrow {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.adv-nav__arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.adv-nav__label {
+  font: 500 18px/1.1 var(--serif);
+  color: var(--ink-2);
+  padding: 4px 14px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  min-width: 130px;
+  text-align: center;
+}
+
+.adv-nav__label:hover,
+.adv-nav__label.is-open {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.adv-nav__popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translate(calc(-50% + var(--clamp-x, 0px)), var(--clamp-y, 0px));
+  z-index: 20;
+  width: 160px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+}
+
+.adv-nav__popup-item {
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  font: 500 13px/1.2 var(--serif);
+  color: var(--ink);
+  text-align: left;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.adv-nav__popup-item:hover {
+  background: var(--bg-2);
+  color: var(--accent);
+}
+
+.adv-nav__popup-item.is-active {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+/* Static center label for the widget header — no hover/click. */
+.adv-nav__label--static {
+  cursor: default;
+  border-color: transparent;
+  background: transparent;
+}
+
+.adv-nav__label--static:hover,
+.adv-nav__label--static.is-open {
+  border-color: transparent;
+  color: var(--ink-2);
+  background: transparent;
+}
+
+/* ─── 2-column row: narrow label cell | wider card cell ───────────────── */
+.adv-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adv-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Highlight wraps only the card cell — leaves the label cell neutral.
+   1 px accent ring sits against the card's own border. No background or
+   padding here so the inner card's own visuals stay intact. */
+.adv-row--highlight .adv-row__card {
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.adv-row__label-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.adv-row__label {
+  font: 500 12px/1.15 var(--serif);
+  text-align: center;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  padding: 2px 0;
+}
+
+.adv-row__label--clickable {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.adv-row__label--clickable:hover,
+.adv-row__label--clickable.is-open {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.adv-row__lock,
+.adv-row__unlock {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 9px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adv-row__lock:hover,
+.adv-row__unlock:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.adv-row__popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  transform: translate(var(--clamp-x, 0px), var(--clamp-y, 0px));
+  z-index: 20;
+  width: 130px;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+}
+
+.adv-row__popup-item {
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  font: 500 13px/1.2 var(--serif);
+  color: var(--ink);
+  text-align: left;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.adv-row__popup-item:hover {
+  background: var(--bg-2);
+  color: var(--accent);
+}
+
+.adv-row__popup-item.is-active {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+

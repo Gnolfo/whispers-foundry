@@ -1,0 +1,21 @@
+{
+  "id": "whispers-foundry",
+  "title": "Whispers in the Roots",
+  "description": "Foundry VTT module that bundles the Whispers character-sheet SPA and persists each character's state on the Foundry actor (actor.system.whispers) instead of browser localStorage.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "Stone Table Press"
+    }
+  ],
+  "esmodules": [
+    "scripts/whispers-sheet.js"
+  ],
+  "styles": [
+    "styles/whispers-sheet.css"
+  ]
+}

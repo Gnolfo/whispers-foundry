@@ -1,0 +1,247 @@
+/* ─── Section header — prominent variant for ribbon panels ──────────── */
+.section-title--prominent {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.section-title__btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.section-title__btn:hover {
+  color: var(--ink);
+  border-bottom-color: var(--rule-2);
+}
+
+/* ─── BareSelect: the styled dropdown used across the sheet ──────────── */
+.bare-select {
+  font-size: 13px;
+  font-family: var(--sans);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 2px 18px 1px 2px;
+  color: var(--ink);
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink-3) 50%),
+    linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 8px) 50%, calc(100% - 4px) 50%;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* Locked = committed value, render as a clean fact (not a disabled input). */
+.bare-select.is-locked,
+.bare-select.is-locked:disabled {
+  color: var(--ink);
+  cursor: default;
+  background-image: none;
+  padding-right: 2px;
+  border-bottom-color: transparent;
+}
+
+/* ─── Save / Load bar ──────────────────────────────────────────────────── */
+.save-load-bar {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.save-load-btn {
+  font: 500 11px/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+.save-load-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+
+/* ─── Characters menu ──────────────────────────────────────────────────── */
+.characters-menu {
+  position: relative;
+}
+.characters-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.characters-menu__caret {
+  font-size: 9px;
+  line-height: 1;
+  color: var(--ink-3);
+}
+.characters-menu__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  max-height: 70vh;
+  overflow: auto;
+  background: var(--bg);
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  z-index: 50;
+}
+.characters-menu__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--rule-2);
+  color: var(--ink-3);
+}
+.characters-menu__count {
+  font: 500 11px/1 var(--mono);
+  color: var(--ink-3);
+}
+.characters-menu__empty {
+  padding: 14px 12px;
+  color: var(--ink-3);
+  font-size: 12px;
+  font-style: italic;
+}
+.characters-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.characters-row {
+  border-bottom: 1px solid var(--rule);
+}
+.characters-row:last-child {
+  border-bottom: 0;
+}
+.characters-row__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  transition: background 0.1s;
+}
+.characters-row__main:hover {
+  background: var(--bg-2);
+}
+.characters-row.is-selected .characters-row__main {
+  background: var(--bg-2);
+}
+.characters-row__name {
+  font: 500 13px/1.2 var(--serif);
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.characters-row.is-current .characters-row__name {
+  font-weight: 600;
+}
+.characters-row__dot {
+  color: var(--accent);
+  font-size: 9px;
+  line-height: 1;
+}
+.characters-row__subtitle {
+  font: 400 11px/1.2 var(--sans);
+  color: var(--ink-3);
+}
+.characters-row__actions {
+  display: flex;
+  gap: 6px;
+  padding: 6px 12px 10px;
+  background: var(--bg-2);
+}
+.characters-row__action {
+  font: 500 10px/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 5px 9px;
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+.characters-row__action:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+.characters-row__action:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.characters-row__action--danger {
+  color: var(--ink-2);
+}
+.characters-row__action--danger:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.characters-row__confirm {
+  padding: 8px 12px 10px;
+  background: var(--bg-2);
+  border-top: 1px dashed var(--rule);
+}
+.characters-row__confirm-text {
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+.characters-row__confirm-actions {
+  display: flex;
+  gap: 6px;
+}
+.characters-menu__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--rule-2);
+  background: var(--bg);
+}
+.characters-menu__footer-btn {
+  font: 500 11px/1 var(--sans);
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 6px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.1s, border-color 0.1s;
+}
+.characters-menu__footer-btn:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+.characters-menu__footer-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+

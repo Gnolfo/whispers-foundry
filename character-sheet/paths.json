@@ -1,0 +1,690 @@
+[
+	{
+		"key": "tactician",
+		"name": "Tactician",
+		"classes": [
+			"rogue",
+			"warrior",
+			"champion"
+		],
+		"abilities": [
+			{
+				"key": "assess",
+				"name": "Assess",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Reset your Hits, clear one Guard Break. You gain an important insight for this fight (provided by the GM). Add advantage to your stamina roll."
+			},
+			{
+				"key": "regroup",
+				"name": "Regroup",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Up to 4 allies (you can be one of them) gain 1 stamina, clear 2 hits, and are granted a short move to be made immediately."
+			},
+			{
+				"key": "show-of-force",
+				"name": "Show of Force",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make an attack. Grant an attack for two allies. If your attack missed, their attacks are at disadvantage."
+			},
+			{
+				"key": "rally",
+				"name": "Rally",
+				"type": "reaction",
+				"stamina": 4,
+				"trigger": "An ally is wounded by an attack",
+				"desc": "Ally clears half the hits (RD) taken in the attack. Grant any ally (could be the same) a short move and an action to take immediately"
+			}
+		]
+	},
+	{
+		"key": "plucky",
+		"name": "Plucky",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "bravado",
+				"name": "Bravado",
+				"type": "action",
+				"stamina": 6,
+				"desc": "Attack with advantage. If it's a solid hit, allies gain 2 Stamina"
+			},
+			{
+				"key": "clever-zinger",
+				"name": "Clever Zinger",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Invoke a hazard (your choice) for all enemies able to perceive and understand you. Failing takes 1d6 - 1 hits (min 0), but no wounds are possible"
+			},
+			{
+				"key": "lets-getem",
+				"name": "Let's Get'em!",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "An enemy attack misses an ally",
+				"desc": "Ally gets advantage on next stamina roll. Make an attack, at +1 if against the enemy that missed."
+			},
+			{
+				"key": "look-out",
+				"name": "Look Out!",
+				"type": "reaction",
+				"stamina": 4,
+				"trigger": "An ally is attacked",
+				"desc": "Ally's Guard is raised by 2 for the attack."
+			}
+		]
+	},
+	{
+		"key": "brawler",
+		"name": "Brawler",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "bring-it-on",
+				"name": "Bring it On",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Clear 2 hits, and 1 more per enemy you're threatened by or threatening. Make an attack at +1."
+			},
+			{
+				"key": "used-to-this",
+				"name": "Used to This",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make two melee attacks against different targets. If you like the first roll, spend 1 stamina to apply it to the second target instead of rolling the second."
+			},
+			{
+				"key": "counterblow",
+				"name": "Counterblow",
+				"type": "reaction",
+				"stamina": 1,
+				"trigger": "You are hit by a melee attack",
+				"desc": "Make a melee attack back at them at -1"
+			},
+			{
+				"key": "right-behind-you",
+				"name": "Right Behind You",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "An enemy moves out of your threatened area",
+				"desc": "After they move, move short to the nearest square adjacent to them. Make an attack against them and invoke Surprise (advantage)"
+			}
+		]
+	},
+	{
+		"key": "trapper",
+		"name": "Trapper",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "caltrops",
+				"name": "Caltrops",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Pick two pairs of squares sharing one side, with at least one of each pair within a medium move. Anyone occupying them gains Distracted. Any move into or out of those squares: invoke Disruption, take 1 hit on failure"
+			},
+			{
+				"key": "throw-net",
+				"name": "Throw Net",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make a ranged attack at +1, -4 hits. On a glance or better, invoke Disruption. Target is Grappled on failure."
+			}
+		]
+	},
+	{
+		"key": "standard",
+		"name": "Standard",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "charge",
+				"name": "Charge",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Move short directly toward an opponent. Make an attack at +1"
+			},
+			{
+				"key": "strike",
+				"name": "Strike",
+				"type": "action",
+				"stamina": 1,
+				"desc": "Make a melee attack."
+			},
+			{
+				"key": "welcoming-strike",
+				"name": "Welcoming Strike",
+				"type": "reaction",
+				"stamina": 2,
+				"trigger": "An enemy moves into your threatened area.",
+				"desc": "Make a melee attack against them"
+			}
+		]
+	},
+	{
+		"key": "berserker",
+		"name": "Berserker",
+		"classes": [
+			"warrior"
+		],
+		"abilities": [
+			{
+				"key": "clobber",
+				"name": "Clobber",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make a melee attack. On a hit, invoke a Stagger hazard. on failure, +2 hits and you clear 2 hits. Feels good every time."
+			},
+			{
+				"key": "reckless-strike",
+				"name": "Reckless Strike",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make an attack with advantage. You have disadvantage on your next stamina roll."
+			},
+			{
+				"key": "wild-strikes",
+				"name": "Wild Strikes",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make up to 3 melee attacks in succession. If an attack glances, gain 2 hits. If it misses completely, gain 3 hits instead. You can stop at any time."
+			},
+			{
+				"key": "unfazed",
+				"name": "Unfazed",
+				"type": "reaction",
+				"stamina": 1,
+				"trigger": "You take a wound from an attack",
+				"desc": "Clear 2 hits. Make an attack."
+			}
+		]
+	},
+	{
+		"key": "grappler",
+		"name": "Grappler",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "combat-grab",
+				"name": "Combat Grab",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make a melee attack, -3 hits. if it hits, opponent is Grappled"
+			},
+			{
+				"key": "disarm",
+				"name": "Disarm",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make a melee attack, -3 hits. If you glance or better, invoke Disruption and on failure their weapon is wrenched free and falls"
+			},
+			{
+				"key": "takedown",
+				"name": "Takedown",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make an attack, -3 hits. On a glance or better, invoke Disruption. On failure, they take d6 hits and are prone."
+			},
+			{
+				"key": "redirect",
+				"name": "Redirect",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "Someone moves into or within your threatened space",
+				"desc": "Make an attack. Invoke Disruption (stop movement and move the opponent to any unoccupied square adjacent to you). Optionally, you may move into the square they occupied when doing this."
+			}
+		]
+	},
+	{
+		"key": "duelist",
+		"name": "Duelist",
+		"classes": [
+			"rogue",
+			"champion"
+		],
+		"abilities": [
+			{
+				"key": "combat-roll",
+				"name": "Combat Roll",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Move 1 + half your short move (round up) and make an attack at +1"
+			},
+			{
+				"key": "grim-determination",
+				"name": "Grim Determination",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make an attack. If you are wounded, it is with advantage"
+			},
+			{
+				"key": "keep-the-momentum",
+				"name": "Keep the Momentum",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make a melee attack at -1. Target is Distracted on a glance or better."
+			},
+			{
+				"key": "riposte",
+				"name": "Riposte",
+				"type": "reaction",
+				"stamina": 2,
+				"trigger": "An attack against you misses",
+				"desc": "Make a melee attack, at +1 if against the attacker."
+			}
+		]
+	},
+	{
+		"key": "companion",
+		"name": "Companion",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "combined-might",
+				"name": "Combined Might",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make an attack. Grant your companion an attack on the same target, with advantage if your attack glanced or better."
+			},
+			{
+				"key": "hear-me-roar",
+				"name": "Hear Me Roar",
+				"type": "reaction",
+				"stamina": 1,
+				"trigger": "Your companion is downed. You can use this reaction on your turn",
+				"desc": "Move short, make an attack at +1, with advantage if against anyone who attacked your companion this turn. Move yourself in the turn order to go next. If this is your turn, instead take an extra action. Your companion's next Fate roll is with advantage."
+			}
+		]
+	},
+	{
+		"key": "ambusher",
+		"name": "Ambusher",
+		"classes": [
+			"rogue",
+			"warden"
+		],
+		"abilities": [
+			{
+				"key": "cross-shot",
+				"name": "Cross Shot",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Call a target and grant an ally an attack against them. Make a ranged attack. +1 to your attack if their attack hit, and another +1 if you attack the called target."
+			},
+			{
+				"key": "point-blank",
+				"name": "Point Blank",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make a ranged attack. Ignore disadvantage from being threatened. If it hits and the target is within short, target is Shaken."
+			},
+			{
+				"key": "rapid-shot",
+				"name": "Rapid Shot",
+				"type": "action",
+				"stamina": 1,
+				"desc": "Make a ranged attack. Take another action, however all further actions this turn cost +1 stamina (cumulative). You can take this action twice per turn."
+			},
+			{
+				"key": "press-the-attack",
+				"name": "Press the Attack",
+				"type": "reaction",
+				"stamina": 5,
+				"trigger": "An ally wounds an enemy",
+				"desc": "That ally and up to two others make a stamina roll. Make an attack."
+			}
+		]
+	},
+	{
+		"key": "opportunist",
+		"name": "Opportunist",
+		"classes": [
+			"rogue"
+		],
+		"abilities": [
+			{
+				"key": "cruel-strike",
+				"name": "Cruel Strike",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make a melee attack. +1 if the target is wounded."
+			},
+			{
+				"key": "sneak-attack",
+				"name": "Sneak Attack",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make an attack with advantage. If an ally threatens your target, regain 2 stamina. If the attack results in no wounds taken, regain 1 stamina.    * Cost reduced by 2 if target has not yet taken an action in this encounter"
+			},
+			{
+				"key": "close-one",
+				"name": "Close One!",
+				"type": "reaction",
+				"stamina": 1,
+				"trigger": "An enemy attack misses you",
+				"desc": "Clear d6 hits."
+			}
+		]
+	},
+	{
+		"key": "leader",
+		"name": "Leader",
+		"classes": [
+			"champion"
+		],
+		"abilities": [
+			{
+				"key": "deft-strike",
+				"name": "Deft Strike",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make a melee attack, +2 hits"
+			},
+			{
+				"key": "encourage",
+				"name": "Encourage",
+				"type": "action",
+				"stamina": 2,
+				"desc": "An ally clears 1d6+1 hits and gains 1 stamina.  You may take another action. You cannot Encourage the same ally more than once per turn."
+			},
+			{
+				"key": "inspiring-presence",
+				"name": "Inspiring Presence",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make an attack. Allies within medium of you or the target clear hits equal to half of the hits caused by the attack."
+			},
+			{
+				"key": "stalwart",
+				"name": "Stalwart",
+				"type": "reaction",
+				"stamina": 2,
+				"trigger": "An ally makes an attack",
+				"desc": "You each clear 1d6 hits. if within short, ally's attack has +1"
+			}
+		]
+	},
+	{
+		"key": "scoundrel",
+		"name": "Scoundrel",
+		"classes": [
+			"rogue"
+		],
+		"abilities": [
+			{
+				"key": "dirty-fighting",
+				"name": "Dirty Fighting",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make a melee attack and invoke Disruption with +1 rank. On failure: Grant an ally an attack on the target with advantage. Before this, you may optionally take your target's position and displace them one square."
+			},
+			{
+				"key": "feint",
+				"name": "Feint",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Invoke Surprise and make an attack against a target.  On failure: the attack is made with advantage."
+			},
+			{
+				"key": "in-over-your-head",
+				"name": "In Over Your Head",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make an attack at +1. If the target is wounded after the attack, and the attack glanced or better, invoke Dread. On failure, they are Panicked."
+			},
+			{
+				"key": "gang-up",
+				"name": "Gang Up",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "An enemy you threaten is hit by an attack",
+				"desc": "Make a melee attack with advantage against that enemy."
+			}
+		]
+	},
+	{
+		"key": "physician",
+		"name": "Physician",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "emergency-care",
+				"name": "Emergency Care",
+				"type": "action",
+				"stamina": 5,
+				"desc": "Make a healing check on a downed ally. The difficulty is twice their Fate. On success remove d3 wounds and ally automatically rolls a six on their next Fate roll."
+			},
+			{
+				"key": "guided-care",
+				"name": "Guided Care",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Guide an adjacent ally to assist your wounds. Remove d3 wounds from yourself."
+			},
+			{
+				"key": "protect-the-needfuls",
+				"name": "Protect the Needfuls",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "You are wounded from an attack",
+				"desc": "Wounds taken is reduced by 1 (min 0). Take 1d6 hits per wound reduced. That could have been worse."
+			}
+		]
+	},
+	{
+		"key": "defender",
+		"name": "Defender",
+		"classes": [
+			"warrior",
+			"champion",
+			"warden"
+		],
+		"abilities": [
+			{
+				"key": "fierce-protection",
+				"name": "Fierce Protection",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Move short into ally's square and shift them to any square adjacent to you. Ally gains 1 stamina and clears 2 hits.  Take another action."
+			},
+			{
+				"key": "flashing-taunt",
+				"name": "Flashing Taunt",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Pick a target. Until the end of your next turn, if they make any attack that doesn't include you as a target, they become Distracted (before their attack is made). Take another Action."
+			},
+			{
+				"key": "thick-of-it",
+				"name": "Thick of It",
+				"type": "reaction",
+				"stamina": 2,
+				"trigger": "Ally adjacent to you is attacked",
+				"desc": "Take 1d6 hits and subtract that amount from the attack result. You may swap positions with the ally."
+			}
+		]
+	},
+	{
+		"key": "skirmisher",
+		"name": "Skirmisher",
+		"classes": [
+			"warrior"
+		],
+		"abilities": [
+			{
+				"key": "finisher",
+				"name": "Finisher",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make an attack. On hit, if there is no wound stabilization roll needed, target must make one anyway. If the result required a wound recovery roll, it is made at disadvantage."
+			},
+			{
+				"key": "lunge",
+				"name": "Lunge",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make a melee attack with +1. You may shift 1 just before the attack, and optionally shift back afterward"
+			},
+			{
+				"key": "doesnt-look-bad",
+				"name": "Doesn't Look Bad",
+				"type": "reaction",
+				"stamina": 4,
+				"trigger": "You or an ally is wounded from an attack",
+				"desc": "Wounds taken is reduced by 1 (down to 1)"
+			},
+			{
+				"key": "hitem-back",
+				"name": "Hit'em Back",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "You are hit by an attack",
+				"desc": "Make an attack, +1 if against the target that hit you. Clear 2 hits, and clear 2 more if your attack hit."
+			}
+		]
+	},
+	{
+		"key": "brute",
+		"name": "Brute",
+		"classes": [
+			"warrior"
+		],
+		"abilities": [
+			{
+				"key": "forceful-charge",
+				"name": "Forceful Charge",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Move"
+			},
+			{
+				"key": "knockdown",
+				"name": "Knockdown",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make a melee attack. Invoke Stagger, +1 rank on solid hits. On failure, target is Prone."
+			},
+			{
+				"key": "mighty-strike",
+				"name": "Mighty Strike",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make a melee attack +1"
+			},
+			{
+				"key": "you-are-weak",
+				"name": "You Are Weak",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "You are hit by an attack",
+				"desc": "Your next attack has +1. Your next stamina roll is made with advantage."
+			}
+		]
+	},
+	{
+		"key": "soldier",
+		"name": "Soldier",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "front-line-terror",
+				"name": "Front Line Terror",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Enemies within short of you gain 2 hits. Pick an enemy you threaten and invoke Dread. On failure, they gain an additional d6 hits. Make an attack against them"
+			},
+			{
+				"key": "hold-the-line",
+				"name": "Hold the Line",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Make an attack. Up to two allies within short may move short towards you."
+			},
+			{
+				"key": "the-best-defense",
+				"name": "The Best Defense",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Reset the hits of yourself and an ally within a short move. If the ally is wounded, grant them an attack"
+			},
+			{
+				"key": "not-so-fast",
+				"name": "Not So Fast",
+				"type": "reaction",
+				"stamina": 2,
+				"trigger": "An enemy moves within your threatened area",
+				"desc": "Make a melee attack, on a glance or better invoke Stagger, On failure, the target's movement ends and they remain where they started in your threatened area."
+			}
+		]
+	},
+	{
+		"key": "mount",
+		"name": "Mount",
+		"classes": [],
+		"abilities": [
+			{
+				"key": "heavy-charge",
+				"name": "Heavy Charge",
+				"type": "action",
+				"stamina": 6,
+				"desc": "On your mount, move long straight toward a target and attack with advantage and +1"
+			},
+			{
+				"key": "strikes-from-on-high",
+				"name": "Strikes from on High",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make two melee attacks from your mount."
+			},
+			{
+				"key": "trample",
+				"name": "Trample",
+				"type": "action",
+				"stamina": 4,
+				"desc": "Make an attack. If it hits, add 1 wound to the result if the target is prone, otherwise invoke Stagger(target is prone). Your next stamina roll has disadvantage. Take another action. You can only trample twice in one turn."
+			}
+		]
+	},
+	{
+		"key": "sharpshooter",
+		"name": "Sharpshooter",
+		"classes": [
+			"rogue",
+			"warden"
+		],
+		"abilities": [
+			{
+				"key": "swift-mercy",
+				"name": "Swift Mercy",
+				"type": "action",
+				"stamina": 3,
+				"desc": "Make an attack. You have disadvantage on your next stamina roll. If the target is wounded, the attack is made with advantage."
+			},
+			{
+				"key": "undivided-attention",
+				"name": "Undivided Attention",
+				"type": "action",
+				"stamina": 2,
+				"desc": "Select a target. Your next 2 attacks against that target are at +1. One attack with this bonus is lost each time you are attacked or attack a different target; all are lost if you use this action again. Take another action."
+			},
+			{
+				"key": "fall-back",
+				"name": "Fall back",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "An enemy begins to threaten you",
+				"desc": "Move short."
+			},
+			{
+				"key": "kill-shot",
+				"name": "Kill Shot",
+				"type": "reaction",
+				"stamina": 3,
+				"trigger": "An enemy is solidly hit",
+				"desc": "Make a ranged attack at +1 against the same target."
+			}
+		]
+	}
+]
