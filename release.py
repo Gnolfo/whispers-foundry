@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Release tool for the whispers-foundry Foundry VTT module.
+"""Release tool for the whispers-foundry Foundry VTT system.
 
-Determines the next version from the latest GitHub release, updates module.json
+Determines the next version from the latest GitHub release, updates system.json
 (version + download URL), commits and pushes, builds the asset zip from an
 explicit allowlist, tags, pushes the tag, and creates the GitHub release with
 the manifest and zip as assets.
@@ -332,13 +332,13 @@ def main() -> int:
 
         if latest is not None and not (manifest_version <= latest):
             raise ReleaseError(
-                f"module.json version (v{manifest_version}) is already ahead of the "
+                f"{MANIFEST_PATH} version (v{manifest_version}) is already ahead of the "
                 f"latest release ({latest.tag}); looks like a release was already "
                 "prepared. Revert the manifest bump or finish the release manually."
             )
         if manifest_version == new_version:
             raise ReleaseError(
-                f"module.json already at {new_version.tag}; refusing to double-bump."
+                f"{MANIFEST_PATH} already at {new_version.tag}; refusing to double-bump."
             )
         if local_tag_exists(new_version.tag):
             raise ReleaseError(f"local tag {new_version.tag} already exists")
@@ -348,7 +348,7 @@ def main() -> int:
         if args.dry_run:
             print("→ Dry run: planning only, no changes will be made")
 
-        print("→ Updating module.json")
+        print(f"→ Updating {MANIFEST_PATH}")
         if args.dry_run:
             preview = read_manifest()
             preview["version"] = str(new_version)
