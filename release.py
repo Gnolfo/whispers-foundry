@@ -26,16 +26,18 @@ from pathlib import Path
 
 REPO_SLUG = "Gnolfo/whispers-foundry"
 MAIN_BRANCH = "main"
-MANIFEST_PATH = Path("module.json")
+MANIFEST_PATH = Path("system.json")
 ZIP_NAME = "whispers-foundry.zip"
-ZIP_PREFIX = "whispers-foundry"
+ZIP_PREFIX = "whispers"  # matches `system.json["id"]`, becomes Data/systems/whispers/
 DIST_DIR = Path("dist")
 INCLUDE_PATHS = [
-    "module.json",
-    "scripts",
+    "system.json",
+    "template.json",
+    "module",          # Foundry-side ES modules (DataModels + sheets)
+    "templates",       # Handlebars templates
     "styles",
-    "templates",
-    "character-sheet",
+    "lang",
+    "character-sheet", # bundled SPA, loaded by the iframe in Phase 2
 ]
 SKIP_NAMES = {"__pycache__", ".DS_Store"}
 SEMVER_RE = re.compile(r"^v(\d+)\.(\d+)\.(\d+)$")

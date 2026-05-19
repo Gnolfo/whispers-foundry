@@ -1,6 +1,8 @@
 # Releasing whispers-foundry
 
-All releases go through `release.py`. Do not bump the version, build the zip, or run `gh release create` by hand — the script keeps the tag, manifest, and asset filename in lockstep, and prevents the two classes of mistake that bit us in v0.1.0/v0.1.1 (forgetting to update the download URL when bumping the version; tag/zip/manifest drift).
+All releases go through `release.py`. Do not bump the version, build the zip, or run `gh release create` by hand — the script keeps the tag, manifest, and asset filename in lockstep.
+
+The repo holds a **Foundry VTT system** (the `whispers` system). v0.1.x release tags carry the old module form; v0.2.x onward are the system. v1.0.0 is reserved for when the system reaches a feature-complete first release (full sheet, populated compendium packs, etc.).
 
 ## How to release
 
@@ -11,11 +13,11 @@ All releases go through `release.py`. Do not bump the version, build the zip, or
    python release.py --notes-file /tmp/whispers-release-notes.md
    ```
 
-   By default this is a **patch** bump (e.g. `v0.1.1` → `v0.1.2`). For other bumps:
+   By default this is a **patch** bump (e.g. `v0.2.0` → `v0.2.1`). For other bumps:
 
    ```bash
-   python release.py --notes-file <path> --minor   # v0.1.1 → v0.2.0
-   python release.py --notes-file <path> --major   # v0.1.1 → v1.0.0
+   python release.py --notes-file <path> --minor   # v0.2.1 → v0.3.0
+   python release.py --notes-file <path> --major   # v0.2.1 → v1.0.0
    ```
 
    Always rehearse with `--dry-run` first — it prints the planned version, manifest diff, and zip contents without touching anything.
@@ -23,33 +25,35 @@ All releases go through `release.py`. Do not bump the version, build the zip, or
 ## What the script does (in order)
 
 1. **Pre-flight** — must be in a git repo on `main`, working tree clean, local up to date with `origin/main`, `gh auth status` succeeds, notes file exists and is non-empty.
-2. **Determine version** — reads the latest GitHub release tag (via `gh release list --json tagName`), parses it as semver, applies the requested bump. Falls back to `v0.0.0` as base if no prior releases exist.
-3. **Update `module.json`** — uses `json.load` / `json.dump` (no string editing). Sets `version` and updates `download` URL to `…/releases/download/v<new>/whispers-foundry.zip`. Round-trip-verifies the write.
-4. **Commit + push** — `chore: release v<new>` against `module.json`, pushed to `origin/main`.
-5. **Build the zip** — atomically writes `dist/whispers-foundry.zip` with all entries prefixed `whispers-foundry/`. Files included are taken from an explicit allowlist (see below).
+2. **Determine version** — reads the latest GitHub release tag (via `gh release list --json tagName`), parses it as semver, applies the requested bump.
+3. **Update `system.json`** — uses `json.load` / `json.dump` (no string editing). Sets `version` and updates `download` URL to `…/releases/download/v<new>/whispers-foundry.zip`. Round-trip-verifies the write.
+4. **Commit + push** — `chore: release v<new>` against `system.json`, pushed to `origin/main`.
+5. **Build the zip** — atomically writes `dist/whispers-foundry.zip` with all entries prefixed `whispers/` (matches the system id, so manual installs unpack into `Data/systems/whispers/`).
 6. **Tag + push tag** — annotated tag `v<new>`, pushed to origin.
-7. **Create GitHub release** — `gh release create v<new> module.json dist/whispers-foundry.zip --notes-file <path>`.
+7. **Create GitHub release** — `gh release create v<new> system.json dist/whispers-foundry.zip --notes-file <path>`.
 8. **Report** — prints the new version, tag, commit hash, release URL, and asset list.
 
 ## Versioning
 
-- Source of truth for "current version" is the **latest GitHub release tag**, not `module.json`. The script writes `module.json`, never reads it for the new version.
+- Source of truth for "current version" is the **latest GitHub release tag**, not `system.json`. The script writes `system.json`, never reads it for the new version.
 - Default bump is patch. Use `--major` / `--minor` to override (mutually exclusive).
-- Idempotency guards: aborts if `module.json` is already at the planned version, or if the planned tag already exists locally or remotely.
+- Idempotency guards: aborts if `system.json` is already at the planned version, or ahead of the latest release; aborts if the planned tag already exists locally or remotely.
 
 ## What ships in the zip
 
 The script's `INCLUDE_PATHS` allowlist (source of truth in `release.py`):
 
-- `module.json`
-- `scripts/`
-- `styles/`
-- `templates/`
-- `character-sheet/`
+- `system.json`
+- `template.json`
+- `module/` — DataModels + sheets (Foundry-side JS)
+- `templates/` — Handlebars
+- `styles/` — system stylesheet
+- `lang/` — localization
+- `character-sheet/` — bundled SPA (used by the hybrid sheet's iframe)
 
-Excluded by virtue of not being in the list: `.git/`, `vision.md`, `RELEASE.md`, `release.py`, `dist/`, anything else added to the repo root in the future.
+Excluded by virtue of not being in the list: `.git/`, `vision.md`, `RELEASE.md`, `release.py`, `dist/`, `packs/` (built artifacts; source lives in `packs-src/`), `packs-src/`, `tools/`, `node_modules/`, anything else added to the repo root.
 
-Inside the zip every entry is prefixed `whispers-foundry/` so users get a self-contained folder when they extract.
+Inside the zip every entry is prefixed `whispers/` so users get a self-contained system folder when they extract.
 
 ## Pre-flight conditions (script-enforced)
 
@@ -60,7 +64,7 @@ Inside the zip every entry is prefixed `whispers-foundry/` so users get a self-c
 - `gh auth status` returns 0.
 - `--notes-file` exists and is non-empty.
 
-Any failure halts the script before *any* destructive action.
+Any failure halts the script before any destructive action.
 
 ## Recovery when something goes wrong
 
@@ -72,32 +76,30 @@ The script can fail at different points. The remote state after a failure depend
 | Determining version / updating manifest | unchanged | Re-run. |
 | Commit + push (step 4) | maybe a commit pushed | If `git status` shows the commit landed, the manifest is already bumped — re-running will hit the double-bump guard. Either revert the commit (`git revert HEAD && git push`) and re-run, or finish manually using the script's printed `gh release create` fallback. |
 | Build zip (step 5) | manifest pushed | Re-run is not safe (double-bump guard). Build the zip manually and use the fallback `gh release create` command. |
-| Tag + push tag (step 6) | manifest pushed, tag maybe pushed | If the tag pushed, finish with the fallback `gh release create` command. If only the manifest is pushed, run `git tag -a v<new> -m v<new> && git push origin v<new>` then run `gh release create`. |
-| Create release (step 7) | manifest pushed, tag pushed | The script prints the exact `gh release create` command to run. The release just needs to be created with the existing manifest + zip + notes. |
+| Tag + push tag (step 6) | manifest pushed, tag maybe pushed | If the tag pushed, finish with the fallback `gh release create` command. |
+| Create release (step 7) | manifest pushed, tag pushed | The script prints the exact `gh release create` command to run. |
 
-## Manual fallback (the original v0.1.0 flow)
+## Manual fallback
 
 If the script is broken and you need to release anyway:
 
 ```bash
-# 1. Edit module.json: bump "version" and update "download" URL to .../v<new>/whispers-foundry.zip
+# 1. Edit system.json: bump "version" and update "download" URL to .../v<new>/whispers-foundry.zip
 # 2. Commit and push
-git add module.json
+git add system.json
 git commit -m "chore: release v<new>"
 git push origin main
 
-# 3. Build the zip
-git archive --format=zip --prefix=whispers-foundry/ HEAD -o /tmp/whispers-foundry.zip
+# 3. Build the zip with the prefix matching the system id
+git archive --format=zip --prefix=whispers/ HEAD -o /tmp/whispers-foundry.zip
 
 # 4. Tag and push
 git tag -a v<new> -m "v<new>"
 git push origin v<new>
 
 # 5. Release
-gh release create v<new> module.json /tmp/whispers-foundry.zip \
+gh release create v<new> system.json /tmp/whispers-foundry.zip \
   --repo Gnolfo/whispers-foundry \
   --title "v<new>" \
   --notes-file /tmp/whispers-release-notes.md
 ```
-
-This is the path the script automates; only use it when the script itself is broken.
